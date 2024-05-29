@@ -16,20 +16,19 @@ class Commander :
     self.main_frame.pack(expand=1 , fill='both')
 
     #Info Label
-    self.label = tb.Label(self.main_frame , text='ok.',relief='sunken')
-    self.label.place(x=130 , y=350 , width=300)
-
+    self.label = tb.Label(self.main_frame , text='ok.',font='arial 20',relief='sunken')
+    self.label.place(x=45 , y=190 , width=300)
 
     #Submit BTN
     self.submit = tb.Button(self.main_frame , bootstyle='danger.outline' , text='SUBMIT',padding=(0,14))
-    self.submit.grid(row=2 , column=4 , sticky='we' ,padx=10)
+    self.submit.grid(row=2 , column=4 ,columnspan=2, sticky='we' ,padx=10)
     self.submit.configure(command=self.do_command)
 
   def do_command(self):
     self.label.configure(text='not ok.')
 
 
-window = tb.Window(themename='darkly')
-window.geometry('1000x800')
+window = tb.Window(themename='darkly',resizable=(False,False))
+window.geometry('700x400')
 command = Commander(window = window)
 window.mainloop()
