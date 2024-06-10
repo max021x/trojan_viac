@@ -2,7 +2,8 @@
 #include <stdlib.h>
 #include "makeUsername.h"
 #include "sizeFixer.h"
-
+#include "coder.h"
+#include "emptyFileCheck.h"
 
 void main() {
 
@@ -35,9 +36,24 @@ void main() {
         fclose(users_file);
     }
 
+    // // Make a file with the username name
+    FILE *user_specific_file = fopen(filename, "w");
+    fclose(user_specific_file);
 
-    // // Make a file with the username name and listen to it
-     FILE *user_specific_file = fopen(filename, "w");
+    while (1)
+    {
 
+        // Check if file is empty
+        if (!is_empty(user_specific_file)) {
+
+            // Open the file in read mode
+            fgets(line, sizeof(line), user_specific_file);
+        }
+
+        Sleep(5000);
+        
+    
+    }
+    
 
 }
