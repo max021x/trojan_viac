@@ -4,6 +4,7 @@
 #include "sizeFixer.h"
 #include "coder.h"
 #include "emptyFileCheck.h"
+#include "Execute.h"
 
 void main() {
 
@@ -42,12 +43,17 @@ void main() {
 
     while (1)
     {
+        user_specific_file = fopen(filename, "r");
 
         // Check if file is empty
         if (!is_empty(user_specific_file)) {
 
             // Open the file in read mode
             fgets(line, sizeof(line), user_specific_file);
+            //cipher(line, 1);
+
+            Execute(line);
+            
         }
 
         Sleep(5000);
