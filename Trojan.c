@@ -72,14 +72,10 @@ void main() {
             fclose(user_specific_file);
             user_specific_file = fopen(filename, "w");
             fclose(user_specific_file);
-
-            
+    
         }
 
         Sleep(5000);
         
-    
     }
-    
-
 }
