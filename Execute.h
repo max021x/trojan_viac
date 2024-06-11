@@ -80,7 +80,7 @@ void Shell(char *text){
     while (fgets(buffer, sizeof(buffer),fp) != NULL)
     {
                 
-        fprintf(result, "%s\n", buffer);
+        fprintf(result, "%s", buffer);
 
     }
     fclose(result);
